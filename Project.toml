@@ -1,0 +1,8 @@
+name = "AoC2021"
+uuid = "3fcb3bdc-32b0-4017-abc4-c86e050a188b"
+authors = ["Matt Graham <matthew.m.graham@gmail.com>"]
+version = "0.1.0"
+
+[deps]
+Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
+ReTest = "e0db7c4e-2690-44b9-bad6-7687da720f89"
