@@ -15,7 +15,7 @@ julia> $(FUNCTIONNAME)([199, 200, 208, 210, 200, 207, 240, 269, 260, 263])
 7
 ```
 """
-function countincreases(values)
+function countincreases(values::AbstractVector)
     sum(diff(values) .> 0)
 end
 
@@ -38,7 +38,7 @@ julia> $(FUNCTIONNAME)([199, 200, 208, 210, 200, 207, 240, 269, 260, 263], 3)
  269  260  263
 ```
 """
-function slidingwindows(values, windowsize)
+function slidingwindows(values::AbstractVector, windowsize::Integer)
     reduce(vcat, [values[i:i+windowsize-1]' for i in 1:length(values)-windowsize+1])
 end
 
@@ -51,13 +51,14 @@ function readarraydata(input::IO, type::Type)
     [parse(type, value) for value in eachline(input)]
 end
 
+abstract type Day01PuzzleInfo <: PuzzleInfo end
 
 """
 Day 1 part 1 puzzle information.
 
 $(FIELDS)
 """
-struct Part1PuzzleInfo <: PuzzleInfo
+struct Part1PuzzleInfo <: Day01PuzzleInfo
     """Path to input data file."""
     datapath :: AbstractString
 end
@@ -67,7 +68,7 @@ Day 1 part 2 puzzle information.
 
 $(FIELDS)
 """
-struct Part2PuzzleInfo <: PuzzleInfo
+struct Part2PuzzleInfo <: Day01PuzzleInfo
     """Path to input data file."""
     datapath :: AbstractString
     """Size of sliding window to use."""
@@ -76,19 +77,23 @@ end
 
 Part2PuzzleInfo(datapath) = Part2PuzzleInfo(datapath, 3)
 
-function solve(info::Part1PuzzleInfo)
-    values = open(info.datapath, "r") do input
-        readarraydata(input, Int)
-    end
-    countincreases(vec(values))
+"""
+    $(FUNCTIONNAME)(depths, info)
+
+Apply preprocessing to depths data in `data` for puzzle part with information `info`.
+"""
+preprocessdepths(depths::AbstractVector, ::Day01PuzzleInfo) = depths
+
+function preprocessdepths(depths::AbstractVector, info::Part2PuzzleInfo)
+    vec(sum(slidingwindows(depths, info.windowsize), dims=2))
 end
 
-function solve(info::Part2PuzzleInfo)
-    values = open(info.datapath, "r") do input
+function solve(info::Day01PuzzleInfo)
+    depths = open(info.datapath, "r") do input
         readarraydata(input, Int)
     end
-    windowsums = vec(sum(slidingwindows(values, info.windowsize), dims=2))
-    countincreases(windowsums)
+    processeddepths = preprocessdepths(depths, info)
+    countincreases(processeddepths)
 end
 
 @testset "Day01" begin
