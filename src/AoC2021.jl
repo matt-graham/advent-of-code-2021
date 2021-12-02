@@ -15,7 +15,7 @@ Compute the solution to an Advent of Code puzzle described by `puzzleinfo`.
 """
 function solve(::PuzzleInfo) end
 
-for srcfile in readdir(joinpath(@__DIR__))
+for srcfile in readdir(@__DIR__)
     if occursin(r"^Day[0-9]{2}\.jl", srcfile)
         include(srcfile)
     end
