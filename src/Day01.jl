@@ -39,7 +39,7 @@ julia> $(FUNCTIONNAME)([199, 200, 208, 210, 200, 207, 240, 269, 260, 263], 3)
 ```
 """
 function slidingwindows(values::AbstractVector, windowsize::Integer)
-    reduce(vcat, [values[i:i+windowsize-1]' for i in 1:length(values)-windowsize+1])
+    reduce(vcat, (values[i:i+windowsize-1]' for i in 1:length(values)-windowsize+1))
 end
 
 """
@@ -60,7 +60,7 @@ $(FIELDS)
 """
 struct Part1PuzzleInfo <: Day01PuzzleInfo
     """Path to input data file."""
-    datapath :: AbstractString
+    datapath::AbstractString
 end
 
 """
@@ -70,9 +70,9 @@ $(FIELDS)
 """
 struct Part2PuzzleInfo <: Day01PuzzleInfo
     """Path to input data file."""
-    datapath :: AbstractString
+    datapath::AbstractString
     """Size of sliding window to use."""
-    windowsize :: Integer
+    windowsize::Integer
 end
 
 Part2PuzzleInfo(datapath) = Part2PuzzleInfo(datapath, 3)
