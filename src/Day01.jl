@@ -60,7 +60,7 @@ $(FIELDS)
 """
 struct Part1PuzzleInfo <: Day01PuzzleInfo
     """Path to input data file."""
-    datapath::AbstractString
+    datapath::String
 end
 
 """
@@ -70,9 +70,9 @@ $(FIELDS)
 """
 struct Part2PuzzleInfo <: Day01PuzzleInfo
     """Path to input data file."""
-    datapath::AbstractString
+    datapath::String
     """Size of sliding window to use."""
-    windowsize::Integer
+    windowsize::Int
 end
 
 Part2PuzzleInfo(datapath) = Part2PuzzleInfo(datapath, 3)

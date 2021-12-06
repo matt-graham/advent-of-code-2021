@@ -13,7 +13,7 @@ $(FIELDS)
 """
 struct Part1PuzzleInfo <: Day05PuzzleInfo
     """Path to input data file."""
-    datapath::AbstractString
+    datapath::String
 end
 
 """
@@ -23,7 +23,7 @@ $(FIELDS)
 """
 struct Part2PuzzleInfo <: Day05PuzzleInfo
     """Path to input data file."""
-    datapath::AbstractString
+    datapath::String
 end
 
 """
