@@ -98,7 +98,7 @@ function solve(info::Part2PuzzleInfo)
     oxygengeneratorrate * co2scrubberrate
 end
 
-@testset "Day03" begin
+@testset begin
     @test solve(Part1PuzzleInfo(joinpath(TEST_DATA_DIRECTORY, "day03.txt"))) == 198
     @test solve(Part2PuzzleInfo(joinpath(TEST_DATA_DIRECTORY, "day03.txt"))) == 230
 end

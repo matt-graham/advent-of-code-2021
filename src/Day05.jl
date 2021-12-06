@@ -107,7 +107,7 @@ function solve(info::Day05PuzzleInfo)
     return sum(linefrequencies .>= 2)
 end
 
-@testset "Day04" begin
+@testset begin
     @test solve(Part1PuzzleInfo(joinpath(TEST_DATA_DIRECTORY, "day05.txt"))) == 5
     @test solve(Part2PuzzleInfo(joinpath(TEST_DATA_DIRECTORY, "day05.txt"))) == 12
 end

@@ -98,7 +98,7 @@ function solve(info::Day01PuzzleInfo)
     countincreases(processeddepths)
 end
 
-@testset "Day01" begin
+@testset begin
     @test solve(Part1PuzzleInfo(joinpath(TEST_DATA_DIRECTORY, "day01.txt"))) == 7
     @test solve(Part2PuzzleInfo(joinpath(TEST_DATA_DIRECTORY, "day01.txt"), 3)) == 5
 end

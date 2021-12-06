@@ -131,7 +131,7 @@ function solve(info::Day02PuzzleInfo)
     state.horizontal * state.depth
 end
 
-@testset "Day02" begin
+@testset begin
     @test solve(Part1PuzzleInfo(joinpath(TEST_DATA_DIRECTORY, "day02.txt"))) == 150
     @test solve(Part2PuzzleInfo(joinpath(TEST_DATA_DIRECTORY, "day02.txt"))) == 900
 end

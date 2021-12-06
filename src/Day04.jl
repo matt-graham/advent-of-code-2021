@@ -109,7 +109,7 @@ function solve(info::Part2PuzzleInfo)
     end
 end
 
-@testset "Day04" begin
+@testset begin
     @test solve(Part1PuzzleInfo(joinpath(TEST_DATA_DIRECTORY, "day04.txt"))) == 4512
     @test solve(Part2PuzzleInfo(joinpath(TEST_DATA_DIRECTORY, "day04.txt"))) == 1924
 end
