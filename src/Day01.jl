@@ -16,7 +16,7 @@ julia> $(FUNCTIONNAME)([199, 200, 208, 210, 200, 207, 240, 269, 260, 263])
 ```
 """
 function countincreases(values::AbstractVector)
-    sum(diff(values) .> 0)
+    count(x -> x > 0, diff(values))
 end
 
 """
@@ -39,7 +39,9 @@ julia> $(FUNCTIONNAME)([199, 200, 208, 210, 200, 207, 240, 269, 260, 263], 3)
 ```
 """
 function slidingwindows(values::AbstractVector, windowsize::Integer)
-    reduce(vcat, (values[i:i+windowsize-1]' for i in 1:length(values)-windowsize+1))
+    reduce(
+        vcat, @view(values[i:i+windowsize-1])' for i in 1:length(values)-windowsize+1
+    )
 end
 
 """
