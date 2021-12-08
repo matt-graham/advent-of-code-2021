@@ -42,7 +42,6 @@ function fuelconsumption(::Part2PuzzleInfo, distances::AbstractArray{T}) where {
 end
 
 function solve(info::Day07PuzzleInfo)
-    agecounts = Dict{Int, BigInt}(age => 0 for age in 0:8)
     crabpositions = open(info.datapath) do input
         [parse(Int, position) for position in split(readline(input), ',')]
     end
