@@ -69,7 +69,11 @@ end
 
 Recursively visit points in basin of `heightmap` from `index` recording in `visited`.
 """
-function expandbasin!(visited, index, heightmap)
+function expandbasin!(
+    visited::BitArray{2},
+    index::CartesianIndex{2},
+    heightmap::AbstractArray{T, 2}
+) where T
     visited[index] = true
     for offset in offsetsat(index, size(heightmap))
         if heightmap[index + offset] < 9 && !visited[index + offset]
