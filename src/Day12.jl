@@ -17,7 +17,7 @@ struct Part1PuzzleInfo <: Day12PuzzleInfo
 end
 
 """
-Day 11 part 2 puzzle information.
+Day 12 part 2 puzzle information.
 
 $(FIELDS)
 """
@@ -42,12 +42,12 @@ function readcavenetwork(input::IO)
     connectedcaves = Dict{String, Vector{String}}()
     for line in eachline(input)
         cave1, cave2 = split(line, '-')
-        if cave1 ∈ keys(connectedcaves)
+        if cave1 in keys(connectedcaves)
             push!(connectedcaves[cave1], cave2)
         else
             connectedcaves[cave1] = [cave2]
         end
-        if cave2 ∈ keys(connectedcaves)
+        if cave2 in keys(connectedcaves)
             push!(connectedcaves[cave2], cave1)
         else
             connectedcaves[cave2] = [cave1]
@@ -74,7 +74,11 @@ function explorecavenetwork!(
     for cave in connectedcaves[currentpath[end]]
         if cave == "end"
             push!(paths, [currentpath; cave])
-        elseif isbigcave(cave) || cave ∉ currentpath || (canrevisitsmallcave && cave != "start")
+        elseif (
+            isbigcave(cave)
+            || cave ∉ currentpath
+            || (canrevisitsmallcave && cave != "start")
+        )
             append!(
                 paths,
                 explorecavenetwork!(
