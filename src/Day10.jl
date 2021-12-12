@@ -74,7 +74,7 @@ function expectedclosersandifcorrupted(line)
     lineiscorrupted = false
     firstillegalchar = undef
     for c in line
-        if c in keys(openertoclosermap)
+        if haskey(openertoclosermap, c)
             push!(expectedclosers, openertoclosermap[c])
         elseif length(expectedclosers) == 0 || pop!(expectedclosers) != c
             lineiscorrupted = true

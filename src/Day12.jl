@@ -42,12 +42,12 @@ function readcavenetwork(input::IO)
     connectedcaves = Dict{String, Vector{String}}()
     for line in eachline(input)
         cave1, cave2 = split(line, '-')
-        if cave1 in keys(connectedcaves)
+        if haskey(connectedcaves, cave1)
             push!(connectedcaves[cave1], cave2)
         else
             connectedcaves[cave1] = [cave2]
         end
-        if cave2 in keys(connectedcaves)
+        if haskey(connectedcaves, cave2)
             push!(connectedcaves[cave2], cave1)
         else
             connectedcaves[cave2] = [cave1]
