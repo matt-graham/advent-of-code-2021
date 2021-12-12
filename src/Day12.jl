@@ -39,19 +39,11 @@ isbigcave(cavename::String) = uppercase(cavename) == cavename
 Read cave network from input stream `input`.
 """
 function readcavenetwork(input::IO)
-    connectedcaves = Dict{String, Vector{String}}()
+    connectedcaves = Dict{String, Set{String}}()
     for line in eachline(input)
         cave1, cave2 = split(line, '-')
-        if haskey(connectedcaves, cave1)
-            push!(connectedcaves[cave1], cave2)
-        else
-            connectedcaves[cave1] = [cave2]
-        end
-        if haskey(connectedcaves, cave2)
-            push!(connectedcaves[cave2], cave1)
-        else
-            connectedcaves[cave2] = [cave1]
-        end
+        connectedcaves[cave1] = push!(get(connectedcaves, cave1, Set{String}()), cave2)
+        connectedcaves[cave2] = push!(get(connectedcaves, cave2, Set{String}()), cave1)
     end
     connectedcaves
 end
@@ -67,7 +59,7 @@ specified by `canrevisitsmallcave`.
 
 function explorecavenetwork!(
     currentpath::Vector{String},
-    connectedcaves::Dict{String, Vector{String}},
+    connectedcaves::Dict{String, Set{String}},
     canrevisitsmallcave::Bool,
 )
     paths::Vector{Vector{String}} = []
