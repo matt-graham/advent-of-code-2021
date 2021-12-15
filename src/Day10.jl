@@ -26,16 +26,6 @@ struct Part2PuzzleInfo <: Day10PuzzleInfo
     datapath::String
 end
 
-"""
-    $(FUNCTIONNAME)(input)
-
-Read two-dimensional integer (1:9) heightmap data from input stream `input`.
-"""
-function readheightmap(input::IO)
-    reduce(vcat, [parse(Int, c) for c in line]' for line in eachline(input))
-end
-
-
 """Map from opening character to corresponding closing character."""
 const openertoclosermap = Base.ImmutableDict(
     '(' => ')', '[' => ']', '{' => '}', '<' => '>'
